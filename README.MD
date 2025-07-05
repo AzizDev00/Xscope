@@ -1,133 +1,171 @@
-
 ---
 
 ````markdown
-# Xscope 🔍  
-**Linux Recon & Exploitation Toolkit**
+# 🔍 Xscope — Linux Recon & Exploitation Toolkit
 
-Xscope is an advanced, modular toolkit designed for network reconnaissance, Wi-Fi analysis, privilege auditing, and more — tailored for Linux (especially Kali Linux) environments.
-
----
-
-## 🎯 Features
-
-| Option | Tool Name                                | Description |
-|--------|------------------------------------------|-------------|
-| 1      | **Live Packet Sniffer**                 | Captures network traffic using raw sockets and displays IP-level metadata. |
-| 2      | **Network Recon Scanner**               | Scans hosts, ports, services, and banners across the network using `nmap`. |
-| 3      | **Telegram Tool (.session & Code)**     | Generates `.session` files and fetches Telegram login codes from API using `telethon`. |
-| 4      | **Privilege Escalation Auditor**        | Scans for common Linux misconfigurations, SUID binaries, writable cron jobs, and sudo rights. |
-| 5      | **Credential Sniffer (HTTP, FTP, SMTP)**| Sniffs plaintext credentials over insecure protocols from live traffic. |
-| 6      | **Wi-Fi Toolkit (Passive, Deauth, Handshake)** | Launches passive scans, deauthentication attacks, and handshake captures. |
+**Xscope** is a powerful modular toolkit built for ethical hackers, cybersecurity researchers, and penetration testers. It provides advanced utilities for network reconnaissance, wireless auditing, privilege escalation analysis, and credential sniffing — optimized for **Linux environments** like Kali Linux.
 
 ---
 
-## 🛠️ Installation
+## ⚙️ Toolkit Overview
 
-Clone the repository:
+| # | Tool                                | Description |
+|--:|-------------------------------------|-------------|
+| 1 | **Live Packet Sniffer**             | Captures IP/TCP/UDP/ICMP packets using raw sockets with real-time output. |
+| 2 | **Network Recon Scanner**           | Uses `nmap` to discover hosts, open ports, services, and basic fingerprinting. |
+| 3 | **Telegram Session Manager**        | Creates `.session` files & retrieves 2FA login codes via Telegram API. |
+| 4 | **Privilege Escalation Auditor**    | Detects SUID binaries, misconfigured permissions, and writable cron jobs. |
+| 5 | **Credential Sniffer**              | Sniffs plaintext HTTP, FTP, SMTP, POP3 credentials from live traffic. |
+| 6 | **Wi-Fi Toolkit (WiSpy)**           | Enables monitor mode, scans for APs, captures WPA handshakes, launches deauth attacks. |
+
+> ✅ Root access is required for most tools.  
+> ✅ Monitor-mode compatible Wi-Fi adapter is required for Wi-Fi modules.
+
+---
+
+## 🚀 Quick Start
+
+### 1. Clone & Install
+
 ```bash
 git clone https://github.com/AzizDev00/Xscope.git
 cd Xscope
-````
-
-Create and activate a virtual environment (recommended):
-
-```bash
 python3 -m venv env
 source env/bin/activate
-```
-
-Install dependencies:
-
-```bash
 pip install -r requirements.txt
-```
-
-> ❗ Some tools like Wi-Fi attacks or credential sniffers require **root privileges** and compatible network interfaces (e.g., monitor mode).
+````
 
 ---
 
-## 🚀 Usage
-
-Run the toolkit:
+### 2. Run the Toolkit
 
 ```bash
-python3 main.py
+sudo python3 main.py
 ```
 
-From the main menu, select a tool by entering its corresponding number.
+---
 
-For example:
+## 🧰 Toolkit Usage (Menu)
 
 ```text
->>> 1   # Live Packet Sniffer
->>> 6   # Wi-Fi Toolkit
+Choose a tool:
+  1. Live Packet Sniffer
+  2. Network Recon Scanner
+  3. Telegram Tool (.session & Code Reader)
+  4. Privilege Escalation Auditor
+  5. Credential Sniffer (HTTP, FTP, SMTP, POP3)
+  6. Wi-Fi Toolkit (Passive, Deauth, Handshake)
+  0. Exit
 ```
 
 ---
 
 ## 🔐 Telegram Tool Setup
 
-You’ll need:
+Xscope includes a Telegram automation tool using [Telethon](https://github.com/LonamiWebs/Telethon).
 
-* **API ID**
-* **API Hash**
+**Steps**:
 
-You can obtain these from: [https://my.telegram.org](https://my.telegram.org)
+1. Go to [my.telegram.org](https://my.telegram.org).
+2. Create an application → Get **API ID** & **API Hash**.
+3. Enter them when prompted.
+4. Xscope will save your `.session` file locally.
+5. One-time login code will be printed in terminal.
 
-The tool will prompt for these and store the `.session` file after login (requires a one-time code sent to your Telegram app).
+> 🔒 Your session is not stored in the cloud — safe for local usage or bot automation.
 
 ---
 
-## ⚙️ Requirements
+## 📡 Wi-Fi Toolkit (WiSpy)
 
-```text
-colorama
-telethon
-scapy
-psutil
-```
+WiSpy offers an interactive Wi-Fi attack suite:
 
-You can install all via:
+| Feature           | Description                              |
+| ----------------- | ---------------------------------------- |
+| Enable Monitor    | Puts Wi-Fi card into monitor mode        |
+| Passive Scan      | Lists visible access points in real-time |
+| Capture Handshake | Captures WPA/WPA2 4-way handshakes       |
+| Deauth Attack     | Disconnects clients from an AP           |
+| Disable Monitor   | Returns interface to managed mode        |
+
+### 🔧 Requirements
+
+* `airmon-ng`, `airodump-ng` (from `aircrack-ng`)
+* Compatible adapter in **monitor mode**
+
+---
+
+## 🕵️‍♂️ Credential Sniffer
+
+Captures plaintext credentials from:
+
+* HTTP login forms
+* FTP user/pass commands
+* SMTP AUTH (login/base64)
+* POP3 login sequences
+
+> 🛑 HTTPS traffic is encrypted and will NOT be captured unless using MITM techniques.
+
+---
+
+## 🧪 Example Use Cases
+
+✅ Security labs / CTFs
+✅ Network reconnaissance in internal testing
+✅ Wi-Fi audits of known devices
+✅ Automated `.session` bot deployments for Telegram
+✅ Customizable for Red-Team operations
+
+---
+
+## 📦 Dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
----
+Or manually install:
 
-## 💻 System Compatibility
-
-| OS         | Status                                                 |
-| ---------- | ------------------------------------------------------ |
-| Kali Linux | ✅ Fully supported                                      |
-| Parrot OS  | ✅ Supported                                            |
-| Ubuntu     | ⚠️ Some modules may not work without extra permissions |
-| Windows    | ❌ Not supported (Linux tools only)                     |
+```bash
+pip install colorama scapy telethon psutil
+```
 
 ---
 
-## 🙌 Contributing
+## 💻 Compatibility
 
-Pull requests and suggestions are welcome! If you find a bug or want to suggest a new module:
-
-* Open an issue
-* Fork and improve
-* Submit a pull request 🚀
+| OS         | Supported  | Notes                           |
+| ---------- | ---------- | ------------------------------- |
+| Kali Linux | ✅ Yes      | Fully compatible                |
+| Parrot OS  | ✅ Yes      | Fully compatible                |
+| Ubuntu     | ⚠️ Partial | May need `sudo` + extra tools   |
+| Windows    | ❌ No       | Designed for Linux terminal use |
 
 ---
 
-## 📫 Contact
+## 🧑‍💻 Author
+
+**Azizbek Sharafutdinov**
 
 * GitHub: [AzizDev00](https://github.com/AzizDev00)
 * Telegram: [@sharafutdinov\_azizbek](https://t.me/sharafutdinov_azizbek)
 
 ---
 
-## 🛡️ Disclaimer
+## ⚠️ Disclaimer
 
-> This toolkit is provided for **educational** and **ethical penetration testing** purposes only.
-> Misuse of this software for illegal or unethical purposes is **strictly prohibited**.
+> This project is for **educational** and **authorized penetration testing** only.
+> The developer is **not responsible** for any misuse or illegal activity.
 
 ---
 
+## 🤝 Contributing
+
+Contributions are welcome!
+If you have a new tool idea, bug fix, or improvement:
+
+1. Fork the repository
+2. Make your changes
+3. Submit a pull request
+
+---
