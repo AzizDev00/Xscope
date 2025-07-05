@@ -1,11 +1,6 @@
----
-
 # 🔍 Xscope — Linux Recon & Exploitation Toolkit
 
 **Xscope** is a powerful modular toolkit built for ethical hackers, cybersecurity researchers, and penetration testers. It provides advanced utilities for network reconnaissance, wireless auditing, privilege escalation analysis, and credential sniffing — optimized for **Linux environments** like Kali Linux.
-
-
----
 
 ## ⚙️ Toolkit Overview
 
